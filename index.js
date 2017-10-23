@@ -35,6 +35,9 @@ function genSelectState(selectors,workers){
           for(const propName in workers){
             if (workers.hasOwnProperty(propName)) {
               selectorMapped[propName] = selectorMapped[propName] || genCreateSelector(map_state_to_station_selector[propName],workers[propName])
+              // apply "reselect" to host logic
+              workers[propName] = (...args) => (1 === args.length) ? selectorMapped[propName](args[0]) : selectorMapped[propName](args)
+
               map_state_to_station_selector[propName] = selectorMapped[propName](map_state_to_station_selector[propName])
             }
           }

@@ -1,6 +1,6 @@
 {
   "name": "red-ux",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "speed your UX with red-ux (powered by reselect)",
   "main": "index.js",
   "scripts": {
