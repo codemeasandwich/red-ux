@@ -1,0 +1,26 @@
+{
+  "name": "red-ux",
+  "version": "0.1.0",
+  "description": "speed your UX with red-ux (powered by reselect)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codemeasandwich/red-ux.git"
+  },
+  "keywords": [
+    "redux"
+  ],
+  "author": "Brian Shannon (http://www.codemeasandwich.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/codemeasandwich/red-ux/issues"
+  },
+  "homepage": "https://github.com/codemeasandwich/red-ux#readme",
+  "dependencies": {
+    "fast-deep-equal": "^1.0.0",
+    "reselect": "^3.0.1"
+  }
+}
