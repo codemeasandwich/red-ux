@@ -1,3 +1,5 @@
-# red-ux
+# red-ux (in BETA!!)
 
-Better UX for Redux
+## performance utilities for progressive web apps.
+
+take your user experience out of the red
