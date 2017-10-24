@@ -2,6 +2,10 @@
 import { createSelector } from 'reselect'
 import equal from 'fast-deep-equal';
 
+function shouldUpdate(a,b){
+  return !equal(a,b)
+}
+
 //=====================================================
 //===================================== create selector
 //=====================================================
@@ -64,7 +68,6 @@ function genSelectState(selectors,workers){
     } else if(Array.isArray(args)){
       selectorMapped[propName] = createSelector(...args,worker)
     } else {
-      debugger;
       throw new Error("unknow type");
     }
   }
@@ -81,7 +84,5 @@ function genSelectState(selectors,workers){
 //============================================== red-ux
 //=====================================================
 
-export default {
-  genSelectState,
-  shouldUpdate : (a,b) => ! equal(a,b)
-}
+export default { };
+export { genSelectState, shouldUpdate  }

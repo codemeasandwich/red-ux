@@ -1,6 +1,6 @@
 {
   "name": "red-ux",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "performance utilities for progressive web apps",
   "main": "index.js",
   "scripts": {
