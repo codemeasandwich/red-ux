@@ -4,6 +4,15 @@
 
 take your user experience out of the red
 
+[![npm version](https://badge.fury.io/js/red-ux.svg)](https://badge.fury.io/js/red-ux)
+
+---
+
+* React:
+    * [shouldUpdate](#react-reduce-unneeded-re-rendering-with-shouldupdate) - reduce unneeded re-rendering
+* Redux:
+    * [genSelectState](#redux-result-caching-with-genselectstate) - result caching
+
 ---
 
 ## React: Reduce unneeded re-rendering with `shouldUpdate`
@@ -130,3 +139,41 @@ export default connect(genSelectState( selecter, works ))(List);
 ```
 
 You pass an `Object` as the first argument to `genSelectState` that maps the to select functions
+
+ - If you have multiple pieces of state. **Pass an Array**
+
+```JS
+const map_state_to_props = (state)=>({
+  user  : state.user,
+  posts : [state.posts.a,
+           state.posts.b]
+}}
+const works = {
+  posts : (a,b) => posts.map( post => ({ id: post.uid, name:post.userName }))
+}
+```
+and
+
+```JS
+const selecters = {
+  user  : state => state.user
+  posts : [state => state.posts.a,
+           state => state.posts.b]
+}
+
+const works = {
+  posts : (a,b) => posts.map( post => ({ id: post.uid, name:post.userName }))
+}
+```
+
+**📌 Note:** As an optimization. The works object will has it's properties wrapped. So feel free to call works properties after the fact, knowing your getting optimized results.
+
+```JS
+const works = {
+  foo : (a) => stuff(a),
+  bar : (a,b) => works.foo(a) + b,
+  cat : (a,b) => works.bar(a,b) + 1000,
+}
+```
+
+`works.bar` will only be executed once, even though its referenced twice.
