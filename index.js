@@ -36,14 +36,16 @@ function genSelectState(selectors,workers){
         const map_state_to_station_selector = selectors(state);
 
         if(workers){
+          
           for(const propName in workers){
-            if (workers.hasOwnProperty(propName)) {
+          //  if (workers.hasOwnProperty(propName)) {
               selectorMapped[propName] = selectorMapped[propName] || genCreateSelector(map_state_to_station_selector[propName],workers[propName])
+
               // apply "reselect" to host logic
-              workers[propName] = (...args) => (1 === args.length) ? selectorMapped[propName](args[0]) : selectorMapped[propName](args)
+              workers[propName] = selectorMapped[propName]
 
               map_state_to_station_selector[propName] = selectorMapped[propName](map_state_to_station_selector[propName])
-            }
+          //  }
           }
         }
         return map_state_to_station_selector;
@@ -65,10 +67,8 @@ function genSelectState(selectors,workers){
       } else {
         selectorMapped[propName] = args;
       }
-    } else if(Array.isArray(args)){
+    } else {// if(Array.isArray(args)){
       selectorMapped[propName] = createSelector(...args,worker)
-    } else {
-      throw new Error("unknow type");
     }
   }
 

@@ -1,17 +1,31 @@
 {
   "name": "red-ux",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "performance utilities for progressive web apps",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:go": "npm test -- --watch --coverage",
+    "test:cover": "npm test -- --coverage --no-cache",
+    "test:watch": "npm test -- --watch"
+  },
+  "jest": {
+    "browser": true,
+    "testPathIgnorePatterns": [
+      "<rootDir>/example/",
+      "<rootDir>/node_modules/"
+    ],
+    "modulePathIgnorePatterns": [
+      "babel-code-frame/.*/__tests__/.*"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codemeasandwich/red-ux.git"
   },
   "keywords": [
-    "redux"
+    "redux",
+    "red-ux"
   ],
   "author": "Brian Shannon",
   "license": "Apache-2.0",
@@ -22,5 +36,10 @@
   "dependencies": {
     "fast-deep-equal": "^1.0.0",
     "reselect": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^21.2.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^21.2.1"
   }
 }
