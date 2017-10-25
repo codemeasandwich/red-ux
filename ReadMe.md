@@ -4,7 +4,7 @@
 
 take your user experience out of the red
 
-[![npm version](https://badge.fury.io/js/red-ux.svg)](https://badge.fury.io/js/red-ux) ![coverage](https://img.shields.io/codecov/c/github/codemeasandwich/red-ux.svg) ![Build](https://circleci.com/gh/codemeasandwich/red-ux.png)
+[![npm version](https://badge.fury.io/js/red-ux.svg)](https://www.npmjs.com/package/red-ux) [![coverage](https://img.shields.io/codecov/c/github/codemeasandwich/red-ux.svg)](https://codecov.io/gh/codemeasandwich/red-ux) [![Build](https://circleci.com/gh/codemeasandwich/red-ux.png)](https://circleci.com/gh/codemeasandwich/red-ux)
 
 ---
 
