@@ -4,39 +4,14 @@
 
 take your user experience out of the red
 
-[![npm version](https://badge.fury.io/js/red-ux.svg)](https://badge.fury.io/js/red-ux)
+[![npm version](https://badge.fury.io/js/red-ux.svg)](https://badge.fury.io/js/red-ux) ![coverage](https://img.shields.io/codecov/c/github/codemeasandwich/red-ux.svg) ![Build](https://circleci.com/gh/codemeasandwich/red-ux.png)
 
 ---
 
-* React:
-    * [shouldUpdate](#react-reduce-unneeded-re-rendering-with-shouldupdate) - reduce unneeded re-rendering
 * Redux:
     * [genSelectState](#redux-result-caching-with-genselectstate) - result caching
-
----
-
-## React: Reduce unneeded re-rendering with `shouldUpdate`
-
-`shouldUpdate` uses [fast-deep-equal](https://github.com/epoberezkin/fast-deep-equal) under the hood.
-
-```JS
-import React, {Component} from 'react';
-import { shouldUpdate } from 'red-ux'
-
-export class List extends Component {
-
-  shouldComponentUpdate(nextProps, nextState){
-    return shouldUpdate(nextProps, nextState);
-  }
-
-  render() {
-    return (
-      <ul>{
-        this.props.data.map(({name,id}) => <li key={id}>{name}</li>)
-      }</ul>)
-    }
-}
-```
+* React:
+    * [shouldUpdate](#react-reduce-unneeded-re-rendering-with-shouldupdate) - reduce unneeded re-rendering
 
 ---
 
@@ -177,3 +152,28 @@ const works = {
 ```
 
 `works.bar` will only be executed once, even though its referenced twice.
+
+---
+
+## React: Reduce unneeded re-rendering with `shouldUpdate`
+
+`shouldUpdate` uses [fast-deep-equal](https://github.com/epoberezkin/fast-deep-equal) under the hood.
+
+```JS
+import React, {Component} from 'react';
+import { shouldUpdate } from 'red-ux'
+
+export class List extends Component {
+
+  shouldComponentUpdate(nextProps, nextState){
+    return shouldUpdate(nextProps, nextState);
+  }
+
+  render() {
+    return (
+      <ul>{
+        this.props.data.map(({name,id}) => <li key={id}>{name}</li>)
+      }</ul>)
+    }
+}
+```
