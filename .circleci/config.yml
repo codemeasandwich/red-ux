@@ -7,4 +7,5 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm test
+      - run: npm run test:cover
+      - run: bash <(curl -s https://codecov.io/bash)
