@@ -17,8 +17,6 @@ take your user experience out of the red
 
 ## React: Reduce unneeded re-rendering with `shouldUpdate`
 
-`shouldUpdate` uses [fast-deep-equal](https://github.com/epoberezkin/fast-deep-equal) under the hood.
-
 ```JS
 import React, {Component} from 'react';
 import { shouldUpdate } from 'red-ux'

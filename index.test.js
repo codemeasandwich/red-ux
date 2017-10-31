@@ -152,6 +152,7 @@ describe('shouldUpdate - reduce unneeded re-rendering', () => {
       })
 
       it('should not reduce', () => {
-          expect(shouldUpdate({a:1},{a:1})).toBeFalsy()
+        const x = {a:1}
+          expect(shouldUpdate(x,x)).toBeFalsy()
       })
 })

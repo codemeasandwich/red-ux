@@ -1,9 +1,22 @@
 // red.js
 import { createSelector } from 'reselect'
-import equal from 'fast-deep-equal';
 
-function shouldUpdate(a,b){
-  return !equal(a,b)
+function shouldUpdate(current, next) {
+
+  var currentKeys = Object.keys( current ),
+      nextKeys    = Object.keys( next );
+
+    if( currentKeys.length !== nextKeys.length ){
+      return true;
+    }
+
+    for (const key of currentKeys) {
+      if(current[key] !== next[key]) {
+          return true;
+      }
+    }
+
+    return false;
 }
 
 //=====================================================
@@ -36,7 +49,7 @@ function genSelectState(selectors,workers){
         const map_state_to_station_selector = selectors(state);
 
         if(workers){
-          
+
           for(const propName in workers){
           //  if (workers.hasOwnProperty(propName)) {
               selectorMapped[propName] = selectorMapped[propName] || genCreateSelector(map_state_to_station_selector[propName],workers[propName])
