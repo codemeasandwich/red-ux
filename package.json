@@ -2,7 +2,7 @@
   "name": "red-ux",
   "version": "0.1.4",
   "description": "performance utilities for progressive web apps",
-  "main": "index.js",
+  "main": "source/index.js",
   "scripts": {
     "test": "jest",
     "test:go": "npm test -- --watch --coverage",
