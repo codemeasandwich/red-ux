@@ -1,41 +1,32 @@
 
 import genCreateSelector from './util/genCreateSelector'
+import nasted from './util/nasted'
+
+//=====================================================
+//======================================= from_function
+//=====================================================
 
 function from_function(selectors,workers){
 
-  const selectorMapped = {};//, propNames = [];
+  const selectorMapped = {};
 
-//++++++++++++++++++++++++++ function of state mapping
+//+++++++++++++++++++ map state to props from function
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     return function map_state_to_props_from_function(state, ownProps) {
 
-        const map_state_to_station_selector = selectors(state);
-
+        const map_state = selectors(state);
         if(workers){
-
           for(const propName in workers){
-/*
-            if("Object" === typeof workers[propName]){
 
-              selectorMapped[propName] = {[propName]:nasted(workers[propName])};
-              continue;
-
-            }*/
-
-          //  if (workers.hasOwnProperty(propName)) {
-              selectorMapped[propName] = selectorMapped[propName] || genCreateSelector(map_state_to_station_selector[propName],workers[propName])
-
+              selectorMapped[propName] = selectorMapped[propName] || nasted(map_state[propName],workers[propName])
               // apply "reselect" to host logic
               workers[propName] = selectorMapped[propName]
-
-              map_state_to_station_selector[propName] = selectorMapped[propName](map_state_to_station_selector[propName])
-          //  }
+              map_state[propName] = nasted( map_state[propName],workers[propName],true)
           }
         }
-        return map_state_to_station_selector;
+        return map_state;
       }
-
 }
 
 export default from_function
