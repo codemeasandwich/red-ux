@@ -162,10 +162,10 @@ beforeEach(() => {
 
     })
 
-//++++++++++++++++++++ should cache results - reselect
+//++++++++++++++++++++ should cache results - obj
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    it('should cache results - reselect', () => {
+    it('should cache results - obj', () => {
 
       const mockCallback = jest.fn();
       mockCallback.mockReturnValue(123)
@@ -182,12 +182,12 @@ beforeEach(() => {
       expect(mockCallback.mock.calls.length).toBe(1);
     })
 
-//+++++++ should cache results(muilt-value) - reselect
+//+++++++ should cache results(muilt-value) - obj
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // !!! COVERED in "should cache results(muilt-value) - obj" !!!
 
-    it('should cache results(muilt-value) - reselect', () => {
+    it('should cache results(muilt-value) - obj', () => {
       const mockCallback = jest.fn();
       mockCallback.mockReturnValue(123)
 
@@ -222,7 +222,7 @@ beforeEach(() => {
 //+++++++++++++++++++++ should support nasted selector
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    it('should support nasted selector', () => {
+    it('should support nasted selector - fn', () => {
 
       const map_to_props = (state)=>({
         user  : {
@@ -247,13 +247,13 @@ beforeEach(() => {
       expect(connect(state).user.friends).toEqual(state.others.map(x=>x.toUpperCase()));
     })
 
-//++++++++++ should support nasted selector - reselect
+//++++++++++ should support nasted selector - obj
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    it('should support nasted selector - reselect', () => {
+    it('should support nasted selector - obj', () => {
 
       const map_to_props = {
-        user  : state => ({friends:state.user.others}),
+        user  : state => ({friends:state.others}),
         posts : state => state.posts
       }
 
@@ -266,7 +266,7 @@ beforeEach(() => {
       const connect = genSelectState( map_to_props, works );
 
       const state = {
-        user:{others:["a","b","c"]},
+        others:["a","b","c"],
         posts:[{uid:123,userName:"Tom"}]
       }
 
@@ -447,6 +447,14 @@ describe('shouldUpdate - reduce unneeded re-rendering', () => {
 
       it('should reduce', () => {
             expect(shouldUpdate({a:1},{a:2})).toBeTruthy()
+      })
+
+//+++++++++++++ should reduce. different object length
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+      it('should reduce - different object length', () => {
+        const x = {a:1}, x2 = {a:1,b:2}
+          expect(shouldUpdate(x,x2)).toBeTruthy()
       })
 
 //++++++++++++++++++++++++++++++++++ should not reduce

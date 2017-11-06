@@ -1,4 +1,4 @@
-# red-ux (in BETA!!)
+# red-ux
 
 ## performance utilities for progressive web apps.
 
