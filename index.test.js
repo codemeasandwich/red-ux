@@ -141,7 +141,8 @@ beforeEach(() => {
 
       const connect = genSelectState( map_to_props_fn );
 
-      expect(connect(state).posts).toEqual([{uid:123,userName:"Tom"}]);
+      expect(connect(state).posts).toEqual(state.posts);
+      //expect(connect(state).posts).toEqual([{uid:123,userName:"Tom"}]);
 
     })
 
@@ -149,10 +150,15 @@ beforeEach(() => {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     it('should return map_to_props if no workers - obj', () => {
-
+      map_to_props_obj.grauit = x =>"uier"
       const connect = genSelectState( map_to_props_obj );
 
-      expect(connect(state).posts).toEqual([{uid:123,userName:"Tom"}]);
+      expect(connect(state)).toEqual({
+        user:state.user,
+        posts:state.posts,
+        grauit:"uier"
+      });
+    //expect([{uid:123,userName:"Tom", grauit:"uier"}]).toEqual(connect(state).posts);
 
     })
 
@@ -308,6 +314,49 @@ beforeEach(() => {
       expect(B.mock.calls.length).toBe(1);
     })
 
+//++++++++++++ should wrap calling worker object(Array) - obj
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    it('should wrap calling worker object(Array) - obj', () => {
+
+      const A = jest.fn();
+      const B = jest.fn();
+
+      const map_to_props = {
+        a: [(state)=>state.one,
+            (state)=>state.five],
+        b: [(state)=>state.one,
+            (state)=>state.five]
+      }
+
+      const works = {
+        a : (one,five) => {
+        //  console.log(6,one)
+          expect(one).toBe(1);
+          expect(five).toBe(5);
+        //    console.log(7,one)
+          A();
+          return one + one;
+        },
+        b : (one,five)=> {
+          expect(one).toBe(1);
+          expect(five).toBe(5);
+          B();
+          //  console.log("?",one,works.a)
+          return works.a(one,five)+five;
+        }
+      }
+
+      const connect = genSelectState( map_to_props, works );
+
+      const state = { one:1, five:5 }
+
+      expect(connect(state)).toEqual({ a:2, b:7 });
+
+      expect(A.mock.calls.length).toBe(1);
+      expect(B.mock.calls.length).toBe(1);
+    })
+
 //+++++++++++++ should wrap calling worker object - fn
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -319,7 +368,6 @@ beforeEach(() => {
       const map_to_props = (state)=> ({
         a:  state.one,
         b: [state.one,state.five]
-
       })
 
       const works = {
@@ -333,6 +381,47 @@ beforeEach(() => {
           expect(five).toBe(5);
           B();
           return works.a(one)+five;
+        }
+      }
+
+      const connect = genSelectState( map_to_props, works );
+
+      const state = { one:1, five:5 }
+
+      expect(connect(state)).toEqual({ a:2, b:7 });
+
+      expect(A.mock.calls.length).toBe(1);
+      expect(B.mock.calls.length).toBe(1);
+    })
+
+//+++++++++++++ should wrap calling worker object - fn
+//++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    it('should wrap calling worker object(Array) - fn', () => {
+
+      const A = jest.fn();
+      const B = jest.fn();
+
+      const map_to_props = (state)=> ({
+        a: [state.one,state.five],
+        b: [state.one,state.five]
+      })
+
+      const works = {
+        a : (one,five) => {
+        //  console.log(one,five)
+          expect(one).toBe(1);
+          expect(five).toBe(5);
+          A();
+        //  console.log("a")
+          return one + one;
+        },
+        b : (one,five)=> {
+          expect(one).toBe(1);
+          expect(five).toBe(5);
+          B();
+      //    console.log("b")
+          return works.a(one,five)+five;
         }
       }
 

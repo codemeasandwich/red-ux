@@ -16,6 +16,13 @@ function from_object(selectors,workers){
 //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 for(const propName in selectors){
+
+/*
+  if(!worker){
+      selectorMapped[propName] = ("function" === typeof selectors[propName]) ? selectors[propName] : x => x
+      continue;
+  }
+*/
   propNames.push(propName)
   const args = selectors[propName];
 
@@ -42,10 +49,10 @@ for(const propName in selectors){
 return function map_state_to_props_from_object(state, ownProps) {
 
   return propNames.reduce((map_props,name)=>{
-/*    console.log(name)
+ /* console.log(name)
     console.log(state)
     console.log(workers)
-    console.log(selectorMapped[name])*/
+    console.log(selectorMapped[name]) */
     map_props[name] = selectorMapped[name](state)
     return map_props;
   },{})
