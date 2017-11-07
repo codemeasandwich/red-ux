@@ -25,7 +25,9 @@
   },
   "keywords": [
     "redux",
-    "red-ux"
+    "reselect",
+    "performance",
+    "optimization"
   ],
   "author": "Brian Shannon",
   "license": "Apache-2.0",
