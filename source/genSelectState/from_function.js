@@ -15,7 +15,7 @@ function from_function(selectors,workers){
 
     return function map_state_to_props_from_function(state, ownProps) {
 
-        const map_state = selectors(state);
+        const map_state = selectors(state, ownProps);
         if(workers){
           for(const propName in workers){
               if( ! selectorMapped[propName]){
