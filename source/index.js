@@ -1,5 +1,5 @@
-import genSelectState from './genSelectState'
-import shouldUpdate from './shouldUpdate'
+import genSelectState from './genSelectState/index'
+import shouldUpdate from './shouldUpdate/index'
 
 //=====================================================
 //============================================== red-ux

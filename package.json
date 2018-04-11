@@ -1,13 +1,14 @@
 {
   "name": "red-ux",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "performance utilities for progressive web apps",
-  "main": "source/index.js",
+  "main": "bundle.js",
   "scripts": {
     "test": "jest",
     "test:go": "npm test -- --watch --coverage",
     "test:cover": "npm test -- --coverage --no-cache",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "build":"rollup source/index.js --o __rollup.js --f cjs && babel __rollup.js --out-file bundle.js && rm __rollup.js"
   },
   "jest": {
     "browser": true,
